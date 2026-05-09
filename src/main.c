@@ -20,17 +20,20 @@ int main(void) {
 
      Texture2D player_textura = LoadTexture("assets/minish.png");
     inicializar_animaciones();
-    SetTargetFPS(80);         
+    SetTargetFPS(100);         
     while (!WindowShouldClose()) {  // Detecta si se presiona el botón de cerrar o la tecla ESC
         
         //actualizacion input
-        velocidad_estado_personaje(&player); //
-        actualizar_input_jugador(&player);
+        
+        velocidad_estado_personaje(&player); 
+        
+        
        //puts("primer punto");
         // Actualización juego
        
         elegir_estado_actual(&player);
         animacion_update(&player);
+        actualizar_izquierda_derecha(&player);
 
         // Dibujado
         BeginDrawing();
@@ -44,7 +47,7 @@ int main(void) {
         EndDrawing();
 
     }
-    UnloadTexture(player_textura);
     CloseWindow();   
+    UnloadTexture(player_textura);
     return 0;
 }

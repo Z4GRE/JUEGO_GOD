@@ -19,29 +19,30 @@ int main(void) {
     InitWindow(screenWidth, screenHeight, "raylib [core] ejemplo - ventana básica");
 
      Texture2D player_textura = LoadTexture("assets/minish.png");
-    
+    inicializar_animaciones();
     SetTargetFPS(80);         
     while (!WindowShouldClose()) {  // Detecta si se presiona el botón de cerrar o la tecla ESC
-       
+        
         //actualizacion input
-        velocidad_personaje(&player);
-
-        actualizar_input_jugador(player.anim_active);
-       
+        velocidad_estado_personaje(&player); //
+        actualizar_input_jugador(&player);
+       //puts("primer punto");
         // Actualización juego
-
-       animacion_update(player.anim_active);
+       
+        elegir_estado_actual(&player);
+        animacion_update(&player);
 
         // Dibujado
         BeginDrawing();
-       
+       //puts("segundo punto");
         ClearBackground(BROWN); // Limpia el fondo con color
-        Rectangle frame = animacion_frame(player.anim_active, 10);
-
+        Rectangle frame = animacion_frame(&player);
+       // puts("tercer punto");
         DrawTexturePro(player_textura,frame,
             (Rectangle){player.posicion.x,player.posicion.y,128,128}, (Vector2){64,128}, 0.0f, WHITE);
 
         EndDrawing();
+
     }
     UnloadTexture(player_textura);
     CloseWindow();   

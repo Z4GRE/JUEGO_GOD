@@ -3,31 +3,31 @@
 #include "animacion.h"
 
 typedef enum { 
-    STATE_IDLE, 
-    STATE_RUN, 
-    STATE_ATTACK,
-    STETE_DEATH
-} PlayerState;
+    IDLE, 
+    RUN, 
+    ATTACK,
+    DEATH
+} player_state;
 
 typedef enum { 
-    DIR_UP, 
-    DIR_DOWN, 
-    DIR_LEFT, 
-    DIR_RIGHT 
-} PlayerDir;
-
-typedef struct Player {
+    IDLE_UP, IDLE_RIGHT, IDLE_DOWN, IDLE_LEFT,
+    UP,  RIGHT,  DOWN, LEFT,
+    MAX_ANIMACIONES
+   
+} player_direccion;
+struct animacion;
+typedef struct Player { //se encarga de todo lo del jugador y la mierda random que no se donde poner XDDDDDDDDD
     Vector2 posicion;  // x, y
     Vector2 velocidad; // hacia donde se mueve
     float speed_stat;  // qué tan rápido corre
-    animacion *anim_active; // Puntero a la animación que debe mostrarse                           
+    player_state state; // en que estado esta el personaje
+    player_direccion direccion;// hacia donde apunta el personaje   
+    struct animacion *animacion_actual;   //la... animacion actual XD que mas voy a poner      
+    bool mirando_derecha;               
 }   Player;   
 
-extern animacion anim_idle;
-extern animacion anim_run_front;
-extern animacion anim_run_side;
-extern animacion anim_run_back;
 extern Player player;
+extern animacion animaciones[MAX_ANIMACIONES];
 
-void velocidad_personaje(Player* s);
-void estado_animacion(PlayerDir*p);
+void velocidad_estado_personaje(Player* s); 
+void state_player(Player *p);

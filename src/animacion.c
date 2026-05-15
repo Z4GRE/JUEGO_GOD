@@ -3,23 +3,12 @@
 #include "player.h"
 #include <stdio.h>
 
+
 void actualizar_izquierda_derecha(Player* s){
   
-    if (s->velocidad.x > 0.0f ) {  s->mirando_derecha = -1; }
-    else if (s->velocidad.x < -0.0f ){  s->mirando_derecha = 1; } 
+    if (s->velocidad.x > 0.0f ) {  s->mirando_derecha = true; }
+    else if (s->velocidad.x < -0.0f ){  s->mirando_derecha = false; } 
 }
-  
-    
-
-
-
-
-
-
-
-
-
-
 /*void actualizar_izquierda_derecha(Player* s){
   if(s->state == RUN) {  
     if (player.velocidad.x > 0.0f ){  s->mirando_derecha = true; }
@@ -134,19 +123,23 @@ void elegir_estado_actual(Player*s){
 }
 
 
-
 Rectangle animacion_frame(Player* s) {
-  
+  if(!s->mirando_derecha){
+  s->pivote.x = PIVOTE_X;
+  }  
+
   float x = (s->animacion_actual->actual_frame % s->animacion_actual->ultimo_frame * s->animacion_actual->tamaño_frame);
-  float y = s->animacion_actual->setY;
+  float y = s->animacion_actual->setY + 0;
 
   float tamaño_derecha = s->animacion_actual->tamaño_frame;
 
-  
-    tamaño_derecha *= s->mirando_derecha;
+  if (s->mirando_derecha){
+    tamaño_derecha *= -1;
+    s->pivote.x = PIVOTE_X + 11.1f; 
+  }  
 
   return (Rectangle){
-    .x = (float)x + s->animacion_actual->setX ,
+    .x = (float)x + s->animacion_actual->setX  ,
     .y= (float)y,
     .width = tamaño_derecha,
     .height = s->animacion_actual->tamaño_frame};

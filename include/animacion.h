@@ -24,10 +24,9 @@ extern animacion anim_run_back;
 
 struct Player;
 
+
 void animacion_update(struct Player* s); //bucle de repeticion de frames
 Rectangle animacion_frame(struct Player*s); //dibuja el bucle de las animaciones
 void actualizar_izquierda_derecha(struct Player* s); // dice si el personaje esta mirando o a la derecha o la izquierda
 void inicializar_animaciones(); //decide la animacion actual en el frame
 void elegir_estado_actual(struct Player*s);
-
-

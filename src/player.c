@@ -3,6 +3,8 @@
 #include "animacion.h"
 #include <math.h>
 #include <stdio.h>
+
+
 Player player = (Player) {
     .posicion = (Vector2){280.0f,330.0f},
     .velocidad = (Vector2){0.0f,0.0f},
@@ -11,7 +13,9 @@ Player player = (Player) {
     .direccion = DOWN,
     .animacion_actual = &anim_idle_front,
     .ultima_direccion = IDLE_DOWN,
-    .mirando_derecha = 1.0f,
+    .mirando_derecha = 1,
+    .poscicion_hitbox = &hitbox_jugador,
+    .pivote = (Vector2){PIVOTE_X, PIVOTE_Y}
 };       
 
 
@@ -33,7 +37,7 @@ animacion anim_idle_back = (animacion) {
     .siguiente_frame = 0,
     .tamaño_frame = TAMAÑO_FRAME,
     .setY= 0.0f,
-    .setX= 76.0f,
+    .setX= 73.5f,
 };
 animacion anim_idle_side = (animacion) {
     .primer_frame = PRIMER_FRAME,
@@ -43,11 +47,11 @@ animacion anim_idle_side = (animacion) {
     .siguiente_frame = 0,
     .tamaño_frame = TAMAÑO_FRAME,
     .setY= 0.0f,
-    .setX= 36.0f,
+    .setX= 45.0f,
 
 };
 
-animacion anim_run_front = (animacion) { //animacion de correr de frente
+animacion anim_run_front = (animacion) { //animacion de correr de frentehhhhhhhhhhhhhhhhhhhhhh
     .primer_frame = 0,
     .ultimo_frame = 9,
     .actual_frame = 0,
@@ -67,7 +71,7 @@ animacion anim_run_side = (animacion) {
     .siguiente_frame = 0,
     .tamaño_frame = TAMAÑO_FRAME,
     .setY= 68.0f,
-    .setX= 341.2f,  
+    .setX= 343.6f,  
 };    
 
 animacion anim_run_back = (animacion) {
@@ -77,7 +81,7 @@ animacion anim_run_back = (animacion) {
     .duracion_frame = DURACION_RUN_FRAME,
     .siguiente_frame = 0,
     .tamaño_frame = TAMAÑO_FRAME,
-    .setY= 71.0f,
+    .setY= 68.0f,
     .setX= 678.0f,
 };
 animacion animaciones[MAX_ANIMACIONES];

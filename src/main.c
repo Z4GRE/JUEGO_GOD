@@ -4,6 +4,7 @@
 #include "animacion.h"
 #include <math.h>
 #include "player.h"
+#include "colisiones.h"
 //fila 2 en 1X 36Y
 //fila 3 en el +68Y
 // fila 4 en el +104Y y +1X 136
@@ -14,8 +15,8 @@ int main(void) {
     (void)player;
     
      // Inicialización
-    const int screenWidth = 600; 
-    const int screenHeight = 600; 
+    const int screenWidth = 700; 
+    const int screenHeight = 700; 
     InitWindow(screenWidth, screenHeight, "raylib [core] ejemplo - ventana básica");
 
      Texture2D player_textura = LoadTexture("assets/minish.png");
@@ -24,7 +25,7 @@ int main(void) {
     while (!WindowShouldClose()) {  // Detecta si se presiona el botón de cerrar o la tecla ESC
         
         //actualizacion input
-        
+       
         velocidad_estado_personaje(&player); 
         
         
@@ -41,9 +42,20 @@ int main(void) {
         ClearBackground(BROWN); // Limpia el fondo con color
         Rectangle frame = animacion_frame(&player);
        // puts("tercer punto");
+       
+       
         DrawTexturePro(player_textura,frame,
-            (Rectangle){player.posicion.x,player.posicion.y,128,128}, (Vector2){64,128}, 0.0f, WHITE);
+            (Rectangle){player.posicion.x,player.posicion.y,128,128}, player.pivote, 0.0f, BLUE);
+                                                                        //25
+        //debug area XDDD    
+        if(IsKeyUp(KEY_H)){    
 
+           Rectangle dRec = { player.posicion.x, player.posicion.y, 128, 128 };    
+           DrawRectangleLinesEx(dRec, 2, WHITE);
+           actualizar_hitbox_jugador(&player);
+        }    
+      
+        
         EndDrawing();
 
     }
@@ -51,3 +63,7 @@ int main(void) {
     UnloadTexture(player_textura);
     return 0;
 }
+
+
+// odio esto.
+//1001101

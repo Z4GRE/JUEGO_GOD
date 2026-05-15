@@ -2,7 +2,7 @@
 CC = gcc
 CFLAGS = -Wall -Iinclude
 LDFLAGS = -Llib -lraylib -lopengl32 -lgdi32 -lwinmm
-SRC = src/main.c src/animacion.c src/player.c
+SRC = src/main.c src/animacion.c src/player.c src/colisiones.c
 OBJ = bin/juego.exe
 
 # Regla principal: qué pasa cuando escribís 'make'
